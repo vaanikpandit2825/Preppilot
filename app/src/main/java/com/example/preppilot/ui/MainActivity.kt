@@ -1,20 +1,14 @@
 package com.example.preppilot.ui
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.preppilot.R
-import com.example.preppilot.ai.GeminiClient
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var adapter: ExplanationAdapter
-    private val geminiClient = GeminiClient()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,31 +16,45 @@ class MainActivity : AppCompatActivity() {
 
         val etUserQuestion = findViewById<EditText>(R.id.etUserQuestion)
         val btnExplain = findViewById<Button>(R.id.btnExplain)
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
 
-        adapter = ExplanationAdapter()
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapter
+        val tvResult = findViewById<TextView>(R.id.tvResult)
+        val tvError = findViewById<TextView>(R.id.tvError)
+        val errorCard = findViewById<View>(R.id.errorCard)
 
         btnExplain.setOnClickListener {
 
             val question = etUserQuestion.text.toString().trim()
 
             if (question.isEmpty()) {
-                adapter.submit(listOf("Please enter a question"))
+                errorCard.visibility = View.VISIBLE
+                tvError.text = "Please enter a question"
+                tvResult.text = ""
                 return@setOnClickListener
             }
 
-            adapter.submit(listOf("Thinking... 🤔"))
+            errorCard.visibility = View.GONE
 
-            lifecycleScope.launch {
-                try {
-                    val result = geminiClient.explain(question)
-                    adapter.submit(result)
-                } catch (e: Exception) {
-                    adapter.submit(listOf("Error", e.message ?: "Something went wrong"))
-                }
+            val answer = when {
+                question.contains("stack", true) ->
+                    "Stack is a linear data structure that follows LIFO (Last In First Out).\n\n" +
+                            "Operations:\n• Push – add element\n• Pop – remove element\n\n" +
+                            "Used in recursion, undo operations, expression evaluation."
+
+                question.contains("queue", true) ->
+                    "Queue follows FIFO (First In First Out).\n\n" +
+                            "Operations:\n• Enqueue – insert\n• Dequeue – remove\n\n" +
+                            "Used in scheduling, buffering."
+
+                question.contains("tree", true) ->
+                    "Tree is a hierarchical data structure.\n\n" +
+                            "Key terms:\n• Root\n• Parent / Child\n• Leaf\n\n" +
+                            "Used in file systems, databases."
+
+                else ->
+                    "Good question 👍\n\nThis feature will be powered by AI soon."
             }
+
+            tvResult.text = answer
         }
     }
 }

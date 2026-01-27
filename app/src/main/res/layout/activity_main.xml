@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/app_bg">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:background="@color/app_bg">
+        android:padding="16dp">
+
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -22,60 +24,106 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="DSA Master"
-                android:textSize="28sp"
+                android:textSize="26sp"
                 android:textStyle="bold"
+                android:textColor="@color/text_primary"
                 android:gravity="center"
-                android:padding="20dp"
-                android:textColor="@color/text_primary"/>
+                android:padding="20dp"/>
         </com.google.android.material.card.MaterialCardView>
+
 
         <com.google.android.material.chip.ChipGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="16dp"
+            app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chipStack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Stack"/>
+                android:text="Stack"
+                app:chipBackgroundColor="@color/chip_bg"/>
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chipQueue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Queue"/>
+                android:text="Queue"
+                app:chipBackgroundColor="@color/chip_bg"/>
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chipTree"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tree"/>
+                android:text="Tree"
+                app:chipBackgroundColor="@color/chip_bg"/>
         </com.google.android.material.chip.ChipGroup>
 
-        <EditText
-            android:id="@+id/etUserQuestion"
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:hint="Ask a question"
-            android:padding="14dp"/>
+            app:cardCornerRadius="16dp"
+            app:cardBackgroundColor="@color/card_bg">
+
+            <EditText
+                android:id="@+id/etUserQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ask a DSA or interview question"
+                android:padding="14dp"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"
+                android:background="@null"/>
+        </com.google.android.material.card.MaterialCardView>
+
 
         <Button
             android:id="@+id/btnExplain"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="16dp"
             android:text="Explain"
             android:textAllCaps="false"
-            android:backgroundTint="@color/accent"
-            android:textColor="@android:color/white"/>
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/primary"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/resultCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:nestedScrollingEnabled="false"/>
+            app:cardCornerRadius="16dp"
+            app:cardBackgroundColor="@color/card_bg">
+
+            <TextView
+                android:id="@+id/tvResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:textSize="15sp"
+                android:textColor="@color/text_primary"/>
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/errorCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:visibility="gone"
+            app:cardCornerRadius="14dp"
+            app:cardBackgroundColor="@color/error_bg">
+
+            <TextView
+                android:id="@+id/tvError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="14dp"
+                android:textSize="14sp"
+                android:textColor="@color/error_text"/>
+        </com.google.android.material.card.MaterialCardView>
+
     </LinearLayout>
 </ScrollView>
