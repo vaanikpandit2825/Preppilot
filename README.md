@@ -8,7 +8,7 @@ The app focuses on clarity, concept-first learning, and a distraction-free UI.
 ## 📱 App Preview
 
 <p align="center">
-  <img src="screenshots/app_ui.jpeg" width="300" alt="PrepPilot App UI"/>
+  <img src="screenshots/app_ui.png" width="300" alt="PrepPilot App UI"/>
 </p>
 
 ---
