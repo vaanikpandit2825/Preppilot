@@ -51,10 +51,11 @@ class MainActivity : AppCompatActivity() {
                             "Used in file systems, databases."
 
                 else ->
-                    "Good question 👍\n\nThis feature will be powered by AI soon."
+                    "Good question \n\nThis feature will be powered by AI soon."
             }
 
             tvResult.text = answer
         }
+
     }
 }
